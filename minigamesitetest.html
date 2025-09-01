@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ArtsyJan Mini Game Site</title>
+  <style>
+    body {
+      font-family: serif;
+      background-color: black;
+      background-image: url('Kirby.gif');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      display: flex;
+      flex-direction: row;
+    }
+
+    /* Left content */
+    .main-content {
+      flex: 3;
+      padding: 20px;
+    }
+
+    .profile {
+      text-align: center;
+      padding: 20px;
+background: linear-gradient(to bottom, #ffffff, #ffd580);
+box-shadow: 0 0 50px 25px rgba(255, 255, 255, 0.6);
+      border-radius: 10px;
+box-shadow: inset 13px 0px 6px -10px rgb(66 66 66 / 20%), inset -13px 0px 6px -10px rgb(66 66 66 / 56%), inset 0px 13px 6px -10px #ffffff, inset 0px -13px 6px -10px rgb(66 66 66 / 38%);
+    }
+
+    .avatar {
+      width: 100px;
+      border-radius: 50%;
+    }
+
+    .projects {
+      padding: 20px;
+    }
+
+    .project-grid {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .project-card {
+      text-align: center;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      overflow: hidden;
+      width: 150px;
+      text-decoration: none;
+      color: inherit;
+box-shadow: 0 0 50px 25px rgba(255, 255, 255, 0.6);
+      transition: transform 0.2s;
+    }
+
+    .project-card:hover {
+      transform: scale(1.05);
+    }
+
+    .project-card img {
+      width: 100%;
+      height: auto;
+    }
+
+    /* Chatbox + Game */
+    .comments {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      border-radius: 10px;
+      margin: 20px;
+      align-items: center;
+}
+
+.chatbox {
+box-shadow: 0 0 50px 25px rgba(255, 255, 255, 0.6);
+}
+
+    #gameCanvas {
+      background: #111;
+      display: block;
+      margin-top: 10px;
+      image-rendering: pixelated;
+      max-width: 100%;
+      height: auto;
+    }
+
+    #score {
+      color: black;
+      font-family: monospace;
+font-size: 16px;
+      text-align: center;
+      margin-top: 5px;
+    }
+
+    #controls {
+      margin-top: 10px;
+      text-align: center;
+    }
+    #controls img {
+      cursor: pointer;
+      margin: 0 10px;
+      max-width: 70px;
+    }
+
+    /* Mobile responsive stacking */
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .main-content {
+        width: 100%;
+        padding: 10px;
+      }
+
+      .comments {
+        width: 100%;
+        margin: 10px 0;
+      }
+
+      #gameCanvas {
+        width: 90%;
+        height: auto;
+      }
+
+  </style>
+</head>
+<body>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <div class="main-content">
+    <div class="profile">
+      <img src="minkeytmnt2012pfpminigame.jpg" alt="Profile Picture" class="avatar">
+      <h1>ArtsyJan's Mini Game Cove</h1>
+
+      <div class="about">
+        <h2>About</h2>
+        <p>You'll find some silly mini games made by me here!</p>
+      </div>
+
+      <div class="working">
+        <h2>What I'm working on</h2>
+<p>somee projectzz...</p>
+      </div>
+
+<script>
+// <![CDATA[
+var news=Array("• downloading data ██████████████████████████████ 🐢80%");
+var cursor=""; // set cursor
+var delay=8; // seconds between each news item
+ 
+/***************************\
+* News Ticker Text Effect *
+*(c)2004-14 mf2fm web-design*
+* http://mf2fm.com/rv *
+* DON'T EDIT BELOW THIS BOX *
+\***************************/
+var newsp, cursp, flash, item=0;
+ 
+if (typeof('addRVLoadEvent')!='function') function addRVLoadEvent(funky) {
+ var oldonload=window.onload;
+ if (typeof(oldonload)!='function') window.onload=funky;
+ else window.onload=function() {
+ if (oldonload) oldonload();
+ funky();
+ }
+}
+ 
+addRVLoadEvent(teleprint);
+ 
+function teleprint () { if (document.getElementById) {
+ var span=document.getElementById("news");
+ while (span.childNodes.length) span.removeChild(span.childNodes[0]);
+ delay*=1000;
+ newsp=document.createElement("span");
+ cursp=document.createElement("span");
+ cursp.appendChild(document.createTextNode(String.fromCharCode(160)+cursor));
+ span.appendChild(newsp);
+ span.appendChild(cursp);
+ ticker();
+}}
+ 
+function ticker() {
+ var i;
+ while (newsp.childNodes.length) newsp.removeChild(newsp.childNodes[0]);
+ newsp.appendChild(document.createTextNode(news[item].substring(0,1)));
+ for (i=1; i<news[item].length; i++) setTimeout('newsp.firstChild.nodeValue="'+news[item].substring(0, i+1)+'"', 100*i);
+ if (news[item].indexOf("www")!=-1) setTimeout('linkit('+item+')', 100*i);
+ setTimeout('flash=setInterval("http://cursp.style.visibility=(http://cursp.style.visibility==\'visible\')?\'hidden\':\'visible\'", 234)', 100*i)
+ setTimeout('clearInterval(flash)', delay);
+ setTimeout('http://cursp.style.visibility="visible"', delay);
+ setTimeout('ticker()', delay);
+ item=++item%news.length;
+}
+ 
+function linkit(q) {
+ var a,p,e,l;
+ p=news[q].indexOf("www");
+ e=news[q].indexOf(" ", p);
+ if (e==-1) e=news[q].length;
+ l=news[q].substring(p, e);
+ while (newsp.childNodes.length) newsp.removeChild(newsp.childNodes[0]);
+ newsp.appendChild(document.createTextNode(news[q].substring(0, p)));
+ a=document.createElement("a");
+ a.href="http://"+l;
+ a.appendChild(document.createTextNode(l));
+ newsp.appendChild(a);
+ newsp.appendChild(document.createTextNode(news[q].substring(e)));
+}
+// ]]>
+</script>
+<span id="news"></span>
+    </div>
+
+    <div class="projects">
+<img src="#" alt="mini games">
+      <div class="project-grid">
+        <a href="#" class="project-card">
+          <img src="thumb1.png" alt="Game 1">
+          <p>Lou's Bakery</p>
+        </a>
+        <a href="#" class="project-card">
+          <img src="thumb2.png" alt="Game 2">
+          <p>-</p>
+        </a>
+        <a href="#" class="project-card">
+          <img src="thumb3.png" alt="Game 3">
+          <p>-</p>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chatbox + Game -->
+  <div class="comments">
+<div class="chatbox">
+    <!-- Chatbox -->
+<img src="#" alt="froggo chat">
+    <div style="height: 500px; width: 100%; max-width: 400px;">
+      <div id="rt-b91eba76b63b09ad4348b2aa3e041003"></div>
+      <script src="https://rumbletalk.com/client/?2!@A9Qm4"></script>
+    </div>
+</div>
+    <br>
+<img src"#" alt="the glitchy mini game of skatey mikey">
+<!-- Game -->
+<canvas id="gameCanvas" width="300" height="300"></canvas>
+<div id="score">Score: 0</div>
+
+<!-- Mobile controls -->
+<div id="controls">
+  <img id="jumpBtn" src="jump.png" alt="Jump">
+  <img id="restartBtn" src="restart.png" alt="Restart">
+</div>
+
+<script>
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
+const scoreDisplay = document.getElementById("score");
+const jumpBtn = document.getElementById("jumpBtn");
+const restartBtn = document.getElementById("restartBtn");
+
+let score = 0;
+let gravity = 0.6;
+let jumpPower = -10;
+let groundHeight = 240;
+let gameOver = false;
+let gameStarted = false;
+
+// Images
+const mikeyImg = new Image();
+mikeyImg.src = "Ninja Turtles Pixel Art Pattern.gif";
+
+const fallingImg = new Image();
+fallingImg.src = "mikey-falling.png";
+
+// Array of building images
+const buildingImgs = [
+  "building.jpg",
+  "building.jpg",
+  "building.jpg"
+].map(src => {
+  const img = new Image();
+  img.src = src;
+  return img;
+});
+
+const playImg = new Image();
+playImg.src = "play.png";
+
+let mikey = {
+  x: 50,
+  y: groundHeight - 40,
+  width: 40,
+  height: 40,
+  dy: 0,
+  jumping: false,
+  falling: false
+};
+
+// Platforms array
+let platforms = [];
+
+function initPlatforms() {
+  platforms = [];
+  let x = 0;
+  let firstWidth = 100; // starting platform width
+  let firstY = groundHeight - 40; // always at ground level
+  let firstImg = buildingImgs[Math.floor(Math.random() * buildingImgs.length)];
+  
+  // first platform
+  platforms.push({ x: x, y: firstY, width: firstWidth, height: groundHeight - firstY, img: firstImg });
+  x += firstWidth + 30; // small gap to second platform
+  let lastY = firstY;
+
+  // generate remaining platforms
+  while (x < canvas.width * 2) {
+    const width = 80 + Math.random() * 50;
+    const maxJumpHeight = 100;
+    const minY = Math.max(groundHeight - 80, lastY - maxJumpHeight);
+    const maxY = Math.min(groundHeight - 40, lastY + maxJumpHeight);
+    const y = minY + Math.random() * (maxY - minY);
+
+    const img = buildingImgs[Math.floor(Math.random() * buildingImgs.length)];
+    platforms.push({ x: x, y: y, width: width, height: groundHeight - y, img: img });
+
+    x += width + (50 + Math.random() * 50); // normal gap
+    lastY = y;
+  }
+}
+
+function spawnPlatform() {
+  const last = platforms[platforms.length - 1];
+  const width = 80 + Math.random() * 50;
+  const maxJumpHeight = 100;
+  const minY = Math.max(groundHeight - 80, last.y - maxJumpHeight);
+  const maxY = Math.min(groundHeight - 40, last.y + maxJumpHeight);
+  const y = minY + Math.random() * (maxY - minY);
+  const gap = 50 + Math.random() * 50;
+  const img = buildingImgs[Math.floor(Math.random() * buildingImgs.length)];
+
+  platforms.push({
+    x: last.x + last.width + gap,
+    y: y,
+    width: width,
+    height: groundHeight - y,
+    img: img
+  });
+}
+
+
+// Reset game
+function resetGame() {
+  score = 0;
+  mikey.y = groundHeight - mikey.height;
+  mikey.dy = 0;
+  mikey.jumping = false;
+  mikey.falling = false;
+  gameOver = false;
+  gameStarted = false;
+  scoreDisplay.textContent = "Score: 0";
+  initPlatforms();
+  drawStartScreen();
+}
+
+// Jump
+function jump() {
+  if (!gameStarted) {
+    gameStarted = true;
+    requestAnimationFrame(loop);
+  }
+  if (!mikey.jumping && !gameOver) {
+    mikey.dy = jumpPower;
+    mikey.jumping = true;
+  }
+}
+
+// Game loop
+function loop() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Update Mikey
+  mikey.y += mikey.dy;
+  mikey.dy += gravity;
+
+  // Draw Mikey
+  if (gameOver) {
+    ctx.drawImage(fallingImg, mikey.x, mikey.y, mikey.width, mikey.height);
+  } else {
+    ctx.drawImage(mikeyImg, mikey.x, mikey.y, mikey.width, mikey.height);
+  }
+
+  // Update platforms
+  for (let i = 0; i < platforms.length; i++) {
+    let p = platforms[i];
+    p.x -= 3;
+    ctx.drawImage(p.img, p.x, p.y, p.width, p.height);
+
+    // Collision detection
+    if (
+      mikey.x < p.x + p.width &&
+      mikey.x + mikey.width > p.x &&
+      mikey.y + mikey.height >= p.y &&
+      mikey.y + mikey.height <= p.y + 20 &&
+      mikey.dy >= 0
+    ) {
+      mikey.y = p.y - mikey.height;
+      mikey.dy = 0;
+      mikey.jumping = false;
+      mikey.falling = false;
+    }
+
+    // Remove off-screen platforms
+    if (p.x + p.width < 0) {
+      platforms.splice(i, 1);
+      score++;
+      scoreDisplay.textContent = "Score: " + score;
+      spawnPlatform();
+      i--;
+    }
+  }
+
+  // Check falling
+  if (mikey.y > canvas.height) {
+    gameOver = true;
+    mikey.falling = true;
+    scoreDisplay.textContent = "Game Over! Score: " + score + " (Press Restart)";
+    return;
+  }
+
+  requestAnimationFrame(loop);
+}
+
+// Draw start screen
+function drawStartScreen() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(playImg, canvas.width / 2 - 50, canvas.height / 2 - 50, 100, 100);
+}
+
+// Initialize
+drawStartScreen();
+
+document.addEventListener("keydown", (e) => {
+  if (e.code === "Space") jump();
+  if (gameOver && e.code === "Enter") resetGame();
+});
+jumpBtn.addEventListener("click", jump);
+restartBtn.addEventListener("click", resetGame);
+
+// Initialize platforms
+initPlatforms();
+</script>
+<script>
+// <![CDATA[
+var colours=new Array("#a6f", "#60f", "#60f", "#a6f", "#ccc"); // colours for top, right, bottom and left borders and background of bubbles
+var bubbles=66; // maximum number of bubbles on screen
+var over_or_under="over"; // set to "over" for bubbles to always be on top, or "under" to allow them to float behind other objects
+
+/****************************
+* JavaScript Bubble Cursor  *
+*(c)2010-13 mf2fm web-design*
+*  http://www.mf2fm.com/rv  *
+* DON'T EDIT BELOW THIS BOX *
+****************************/
+var x=ox=400;
+var y=oy=300;
+var swide=800;
+var shigh=600;
+var sleft=sdown=0;
+var bubb=new Array();
+var bubbx=new Array();
+var bubby=new Array();
+var bubbs=new Array();
+var sploosh=false;
+
+function addLoadEvent(funky) {
+  var oldonload=window.onload;
+  if (typeof(oldonload)!='function') window.onload=funky;
+  else window.onload=function() {
+    if (oldonload) oldonload();
+    funky();
+  }
+}
+
+addLoadEvent(buble);
+
+function buble() { if (document.getElementById) {
+  var i, rats, div;
+  for (i=0; i<bubbles; i++) {
+    rats=createDiv("3px", "3px");
+    rats.style.visibility="hidden";
+	rats.style.zIndex=(over_or_under=="over")?"1001":"0";
+
+    div=createDiv("auto", "auto");
+    rats.appendChild(div);
+    div=div.style;
+    div.top="1px";
+    div.left="0px";
+    div.bottom="1px";
+    div.right="0px";
+    div.borderLeft="1px solid "+colours[3];
+    div.borderRight="1px solid "+colours[1];
+
+    div=createDiv("auto", "auto");
+    rats.appendChild(div);
+    div=div.style;
+    div.top="0px";
+    div.left="1px";
+    div.right="1px";
+    div.bottom="0px"
+    div.borderTop="1px solid "+colours[0];
+    div.borderBottom="1px solid "+colours[2];
+
+    div=createDiv("auto", "auto");
+    rats.appendChild(div);
+    div=div.style;
+    div.left="1px";
+    div.right="1px";
+    div.bottom="1px";
+    div.top="1px";
+    div.backgroundColor=colours[4];
+    if (navigator.appName=="Microsoft Internet Explorer") div.filter="alpha(opacity=50)";
+    else div.opacity=0.5;
+    document.body.appendChild(rats);
+    bubb[i]=rats.style;
+  }
+  set_scroll();
+  set_width();
+  bubble();
+}}
+
+function bubble() {
+  var c;
+  if (Math.abs(x-ox)>1 || Math.abs(y-oy)>1) {
+    ox=x;
+    oy=y;
+    for (c=0; c<bubbles; c++) if (!bubby[c]) {
+      bubb[c].left=(bubbx[c]=x)+"px";
+      bubb[c].top=(bubby[c]=y-3)+"px";
+      bubb[c].width="3px";
+      bubb[c].height="3px"
+      bubb[c].visibility="visible";
+      bubbs[c]=3;
+      break;
+    }
+  }
+  for (c=0; c<bubbles; c++) if (bubby[c]) update_bubb(c);
+  setTimeout("bubble()", 40);
+}
+
+document.onmousedown=splash;
+document.onmouseup=function(){clearTimeout(sploosh);};
+
+function splash() {
+  ox=-1;
+  oy=-1;
+  sploosh=setTimeout('splash()', 100);
+}
+
+function update_bubb(i) {
+  if (bubby[i]) {
+    bubby[i]-=bubbs[i]/2+i%2;
+    bubbx[i]+=(i%5-2)/5;
+    if (bubby[i]>sdown && bubbx[i]>sleft && bubbx[i]<sleft+swide+bubbs[i]) {
+	  if (Math.random()<bubbs[i]/shigh*2 && bubbs[i]++<8) {
+		bubb[i].width=bubbs[i]+"px";
+		bubb[i].height=bubbs[i]+"px";
+	  }
+      bubb[i].top=bubby[i]+"px";
+      bubb[i].left=bubbx[i]+"px";
+    }
+    else {
+      bubb[i].visibility="hidden";
+      bubby[i]=0;
+      return;
+    }
+  }
+}
+
+document.onmousemove=mouse;
+function mouse(e) {
+  if (e) {
+    y=e.pageY;
+    x=e.pageX;
+  }
+  else {
+    set_scroll();
+    y=event.y+sdown;
+    x=event.x+sleft;
+  }
+}
+
+window.onresize=set_width;
+function set_width() {
+  var sw_min=999999;
+  var sh_min=999999;
+  if (document.documentElement && document.documentElement.clientWidth) {
+    if (document.documentElement.clientWidth>0) sw_min=document.documentElement.clientWidth;
+    if (document.documentElement.clientHeight>0) sh_min=document.documentElement.clientHeight;
+  }
+  if (typeof(self.innerWidth)=='number' && self.innerWidth) {
+    if (self.innerWidth>0 && self.innerWidth<sw_min) sw_min=self.innerWidth;
+    if (self.innerHeight>0 && self.innerHeight<sh_min) sh_min=self.innerHeight;
+  }
+  if (document.body.clientWidth) {
+    if (document.body.clientWidth>0 && document.body.clientWidth<sw_min) sw_min=document.body.clientWidth;
+    if (document.body.clientHeight>0 && document.body.clientHeight<sh_min) sh_min=document.body.clientHeight;
+  }
+  if (sw_min==999999 || sh_min==999999) {
+    sw_min=800;
+    sh_min=600;
+  }
+  swide=sw_min;
+  shigh=sh_min;
+}
+
+window.onscroll=set_scroll;
+function set_scroll() {
+  if (typeof(self.pageYOffset)=='number') {
+    sdown=self.pageYOffset;
+    sleft=self.pageXOffset;
+  }
+  else if (document.body && (document.body.scrollTop || document.body.scrollLeft)) {
+    sdown=document.body.scrollTop;
+    sleft=document.body.scrollLeft;
+  }
+  else if (document.documentElement && (document.documentElement.scrollTop || document.documentElement.scrollLeft)) {
+    sleft=document.documentElement.scrollLeft;
+    sdown=document.documentElement.scrollTop;
+  }
+  else {
+    sdown=0;
+    sleft=0;
+  }
+}
+
+function createDiv(height, width) {
+  var div=document.createElement("div");
+  div.style.position="absolute";
+  div.style.height=height;
+  div.style.width=width;
+  div.style.overflow="hidden";
+  div.style.backgroundColor="transparent";
+  return (div);
+}
+// ]]>
+</script>
+
+</body>
+</html>
+
